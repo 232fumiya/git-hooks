@@ -4,13 +4,14 @@
 
 ## commit-msg
 デフォルトで先頭にブランチ名を挿入します。
-コミット時に自動でメッセージ置換します。
-置換文字列
-### #a
-<add>
-### #f
-<feature>
-### #b
-<bugfix>
+コミット時に自動でメッセージ置換します。  
+
+## 置換文字列一覧
+
+`#a => <add>`
+
+`#f => <feature>`
+
+`#b => <bugfix>`
 
 参考URL:https://mono0926.com/programming/sourcetree/

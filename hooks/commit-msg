@@ -8,9 +8,16 @@ if current_branch.include?("/")
   current_branch = current_branch[current_branch.rindex("/")+1 .. current_branch.length]
 end
 
-newmessage = "[add]"      + newmessage.sub(/#a/, '')
-newmessage = "[feature]"  + newmessage.sub(/#f/, '')
-newmessage = "[bugfix]"   + newmessage.sub(/#b/, '')
-newmessage = "[" + current_branch + "]" + message
+if message.include?("#a")
+  message = "[add]"      + message.sub(/#a/, '')
+elsif message.include?("#f")
+  message = "[feature]"  + message.sub(/#f/, '')
+elsif message.include?("#b")
+  message = "[bugfix]"   + message.sub(/#b/, '')
+elsif message.include?("#r")
+  message = "[remove]"   + message.sub(/#r/, '')
+end
 
-File.write(message_file, newmessage)
+message = "[" + current_branch + "]" + message
+
+File.write(message_file, message)

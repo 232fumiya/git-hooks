@@ -4,9 +4,13 @@ message = File.read(message_file, :encoding => Encoding::UTF_8)
 
 current_branch = `git branch | grep '*'`.chomp.sub('* ', '')
 
-newmessage = "#" + current_branch + " " + message
-newmessage = newmessage.sub(/#a/, "<add>")
-newmessage = newmessage.sub(/#f/, "<feature>")
-newmessage = newmessage.sub(/#b/, "<bugfix>")
+if current_branch.include?("/")
+  current_branch = current_branch[current_branch.rindex("/")+1 .. current_branch.length]
+end
+
+newmessage = "[add]"      + newmessage.sub(/#a/, '')
+newmessage = "[feature]"  + newmessage.sub(/#f/, '')
+newmessage = "[bugfix]"   + newmessage.sub(/#b/, '')
+newmessage = "[" + current_branch + "]" + message
 
 File.write(message_file, newmessage)
